@@ -1,3 +1,8 @@
 class ntp::install {
-  realize( Package[ 'ntp', 'ntpdate' ] )
+  package { [
+    'ntp',
+    'ntpdate'
+  ]:
+    ensure => installed,
+  }
 }
