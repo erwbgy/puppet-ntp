@@ -10,7 +10,7 @@ Currently only works on Redhat-like systems.
 
 *country*: the country code (eg. _de_ for Germany or _uk_ for United Kingdom)
 
-*continent*: one of: _europe_, _north-america_, _oceania_, _asia_
+*continent*: one of: _europe_, _asia_, _oceania_, _north-america_, _south-america_, _africa_
 
 *use_hiera*: get the list of time server hostnames using hiera
 
@@ -67,9 +67,10 @@ Or the `ntp_country` variable with a country code:
 
     ntp_country: de
 
-Or the `ntp_continent` variable with one of _europe_, _north-america_, _oceania_, _asia_:
+Or the `ntp_continent` variable with one of _europe_, _asia_, _oceania_,
+_north-america_, _south-america_, _africa_:
 
-    ntp_continent: europe
+    ntp_continent: africa
 
 ### Extlookup configuration
 

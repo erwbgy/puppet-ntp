@@ -1,20 +1,47 @@
 class ntp (
-  $servers = [
-    '0.centos.pool.ntp.org',
-    '1.centos.pool.ntp.org',
-    '2.centos.pool.ntp.org'
-  ],
   $use_extlookup = false,
-  $use_hiera     = false
+  $use_hiera     = false,
+  $servers       = undef,
+  $country       = undef,
+  $continent     = undef
 ) {
   if $use_hiera {
-    $serverlist = hiera('ntpservers', $serverlist)
+    $_servers   = hiera('ntp_servers', undef)
+    $_country   = hiera('ntp_country', undef)
+    $_continent = hiera('ntp_continent', undef)
   }
   elsif $use_extlookup {
-    $serverlist = extlookup('ntpservers', $serverlist)
+    $_servers   = extlookup('ntp_servers', undef)
+    $_country   = extlookup('ntp_country', undef)
+    $_continent = extlookup('ntp_continent', undef)
   }
-  else {
-    $ntp_servers = $serverlist
+  elsif $servers {
+    $_servers   = $servers
+    $_country   = $country
+    $_continent = $continent
+  }
+  if !$_servers {
+    if $_country {
+      $serverlist = [
+        "0.${_country}.pool.ntp.org",
+        "1.${_country}.pool.ntp.org",
+        "2.${_country}.pool.ntp.org",
+      ]
+    }
+    elsif $_continent {
+      $serverlist = [
+        "0.${_continent}.pool.ntp.org",
+        "1.${_continent}.pool.ntp.org",
+        "2.${_continent}.pool.ntp.org",
+      ]
+    }
+    else {
+      $serverlist = [
+        '0.pool.ntp.org',
+        '1.pool.ntp.org',
+        '2.pool.ntp.org',
+      ]
+    }
   }
   include ntp::install
   include ntp::config
