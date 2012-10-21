@@ -12,9 +12,43 @@ Currently only works on Redhat-like systems.
 
 *continent*: one of: _europe_, _asia_, _oceania_, _north-america_, _south-america_, _africa_
 
-*use_hiera*: get the list of time server hostnames using hiera
+*use_hiera*: get configuration values using hiera
 
-*use_extlookup*: get the list of time server hostnames using extlookup
+*use_extlookup*: get configuration values using extlookup
+
+If servers if specified it takes precedence over country or continent.  If
+only country and continent are specified then country takes precedence over
+continent.
+
+If use_hiera or use_extlookup are specified then the other parameters are
+ignored.  Hiera is checked before extlookup.
+
+### Hiera configuration
+
+Add ntp_servers, ntp_country or ntp_continent parameters to a hiera
+config file.  For example in /etc/puppet/hieradata/common.yaml:
+
+Add the ntp_servers variable with a list of time server hostnames (often internal hosts):
+
+    ntp_servers:
+      - ntp1.domain.com
+      - ntp2.domain.com
+
+Or the ntp_country variable with a country code:
+
+    ntp_country: de
+
+Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
+'north-america', 'south-america', 'africa':
+
+    ntp_continent: africa
+
+### Extlookup configuration
+
+Add an ntp_servers variable with a list of time server hostnames - for
+example in /etc/puppet/extdata/common.csv:
+
+    ntp_servers,0.uk.pool.ntp.org,1.uk.pool.ntp.org
 
 ## Examples
 
@@ -51,33 +85,6 @@ Look up configuration using extlookup:
     class { 'ntp':
       use_extlookup => true,
     }
-
-### Hiera configuration
-
-Add ntp_servers, ntp_country or ntp_continent parameters to a hiera
-config file.  For example in /etc/puppet/hieradata/common.yaml:
-
-The ntp_servers variable with a list of time server hostnames (often internal hosts):
-
-    ntp_servers:
-      - ntp1.domain.com
-      - ntp2.domain.com
-
-Or the ntp_country variable with a country code:
-
-    ntp_country: de
-
-Or the ntp_continent variable with one of _europe_, _asia_, _oceania_,
-_north-america_, _south-america_, _africa_:
-
-    ntp_continent: africa
-
-### Extlookup configuration
-
-Add an ntp_servers variable with a list of time server hostnames - for
-example in /etc/puppet/extdata/common.csv:
-
-    ntp_servers,0.uk.pool.ntp.org,1.uk.pool.ntp.org
 
 ## Notes
 
