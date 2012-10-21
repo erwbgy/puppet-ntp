@@ -54,28 +54,28 @@ Look up configuration using extlookup:
 
 ### Hiera configuration
 
-Add `ntp_servers`, `ntp_country` or `ntp_continent` parameters to a hiera
-config file.  For example in `/etc/puppet/hieradata/common.yaml`:
+Add ntp_servers, ntp_country or ntp_continent parameters to a hiera
+config file.  For example in /etc/puppet/hieradata/common.yaml:
 
-The `ntp_servers` variable with a list of time server hostnames (often internal hosts):
+The ntp_servers variable with a list of time server hostnames (often internal hosts):
 
     ntp_servers:
       - ntp1.domain.com
       - ntp2.domain.com
 
-Or the `ntp_country` variable with a country code:
+Or the ntp_country variable with a country code:
 
     ntp_country: de
 
-Or the `ntp_continent` variable with one of _europe_, _asia_, _oceania_,
+Or the ntp_continent variable with one of _europe_, _asia_, _oceania_,
 _north-america_, _south-america_, _africa_:
 
     ntp_continent: africa
 
 ### Extlookup configuration
 
-Add an `ntp_servers` variable with a list of time server hostnames - for
-example in `/etc/puppet/extdata/common.csv`:
+Add an ntp_servers variable with a list of time server hostnames - for
+example in /etc/puppet/extdata/common.csv:
 
     ntp_servers,0.uk.pool.ntp.org,1.uk.pool.ntp.org
 
@@ -85,6 +85,17 @@ See [How do I use pool.ntp.org](http://www.pool.ntp.org/en/use.html) for
 details of the available NTP zones.  NTP servers are not available for all
 countries - see the country list under each continent - so use a continent or
 the default pool if your country is not listed.
+
+## Testing
+
+Tests are implemented using RSpec, rspec-puppet and puppetlabs_spec_helper:
+
+    $ rake spec
+    /usr/bin/ruby -S rspec spec/classes/ntp_spec.rb --color
+    ............
+    
+    Finished in 1.02 seconds
+    12 examples, 0 failures
 
 ## Support
 
