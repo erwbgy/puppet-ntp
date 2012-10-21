@@ -1,6 +1,9 @@
 class ntp::config (
-  $servers
+  $servers = undef
 ) {
+  if $servers == undef {
+    fail('ntp::config servers parameter must be supplied')
+  }
   # defaults
   File {
     owner => 'root',
