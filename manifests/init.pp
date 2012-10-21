@@ -20,6 +20,19 @@ class ntp (
     $_country   = $country
     $_continent = $continent
   }
+
+  case $_continent {
+    'africa':        {}
+    'asia':          {}
+    'europe':        {}
+    'north-america': {}
+    'oceania':       {}
+    'south-america': {}
+    default: {
+      notify { "ntp: unknown continent '${_continent}' specified - known good values are: 'europe', 'asia', 'oceania', 'north-america', 'south-america', 'africa'": }
+    }
+  }
+
   if $_servers {
     $_serverlist = $_servers
   }
@@ -44,6 +57,7 @@ class ntp (
       '2.pool.ntp.org',
     ]
   }
+
   class { 'ntp::config':
     servers => $_serverlist
   }
