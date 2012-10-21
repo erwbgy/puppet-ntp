@@ -1,10 +1,12 @@
-class ntp::config {
+class ntp::config (
+  $servers
+) {
   # defaults
   File {
     owner => 'root',
     group => 'root',
   }
-  file { '/etc/ntp/ntp.conf':
+  file { '/etc/ntp.conf':
     ensure  => present,
     mode    => '0444',
     content => template('ntp/ntp.conf.erb'),

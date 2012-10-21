@@ -19,7 +19,7 @@ restrict -6 ::1
 
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
-<% (scope.lookupvar('ntp::serverlist')).each do |entry| -%>
+<% (scope.lookupvar('ntp::config::servers')).each do |entry| -%>
 server <%= entry %>
 <% end -%>
 
