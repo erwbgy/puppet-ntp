@@ -25,7 +25,7 @@ ignored.  Hiera is checked before extlookup.
 
 ### Hiera configuration
 
-Add an ntp_servers, ntp_country or ntp_continent parameters to a hiera config
+Add an ntp_servers, ntp_country or ntp_continent variable to a hiera config
 file - for example in /etc/puppet/hieradata/common.yaml:
 
 Add the ntp_servers variable with a list of time server hostnames (often
@@ -75,13 +75,13 @@ Specify a list of time servers to use:
       servers => [ 'ntp1.domain.com', 'ntp2.domain.com' ],
     }
 
-Use time servers from the United Kingdom:
+Use time servers from a specific country, in this case the United Kingdom:
 
     class { 'ntp':
       country => 'uk',
     }
 
-Use time servers from Asia:
+Use time servers from a specific continent, in this case Asia:
 
     class { 'ntp':
       continent => 'asia',
