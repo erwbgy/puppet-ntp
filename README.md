@@ -25,10 +25,11 @@ ignored.  Hiera is checked before extlookup.
 
 ### Hiera configuration
 
-Add ntp_servers, ntp_country or ntp_continent parameters to a hiera
-config file.  For example in /etc/puppet/hieradata/common.yaml:
+Add an ntp_servers, ntp_country or ntp_continent parameters to a hiera config
+file - for example in /etc/puppet/hieradata/common.yaml:
 
-Add the ntp_servers variable with a list of time server hostnames (often internal hosts):
+Add the ntp_servers variable with a list of time server hostnames (often
+internal hosts):
 
     ntp_servers:
       - ntp1.domain.com
@@ -45,10 +46,22 @@ Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
 
 ### Extlookup configuration
 
-Add an ntp_servers variable with a list of time server hostnames - for
-example in /etc/puppet/extdata/common.csv:
+Add an ntp_servers, ntp_country or ntp_continent variable to an extlookup
+config file - for example in /etc/puppet/extdata/common.csv:
 
-    ntp_servers,0.uk.pool.ntp.org,1.uk.pool.ntp.org
+Add the ntp_servers variable with a list of time server hostnames (often
+internal hosts):
+
+    ntp_servers,ntp1.domain.com,ntp2.domain.com
+
+Or the ntp_country variable with a country code:
+
+    ntp_country,de
+
+Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
+'north-america', 'south-america', 'africa':
+
+    ntp_continent,africa
 
 ## Examples
 
