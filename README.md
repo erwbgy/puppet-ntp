@@ -16,7 +16,7 @@ Currently only works on Redhat-like systems.
 
 *use_extlookup*: get configuration values using extlookup
 
-If servers if specified it takes precedence over country or continent.  If
+If servers is specified it takes precedence over country or continent.  If
 only country and continent are specified then country takes precedence over
 continent.
 
