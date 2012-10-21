@@ -22,6 +22,7 @@ class ntp (
   }
 
   case $_continent {
+    undef:           {}
     'africa':        {}
     'asia':          {}
     'europe':        {}
