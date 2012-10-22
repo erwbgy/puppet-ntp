@@ -1,6 +1,9 @@
 # puppet-ntp
 
-Puppet module for managing the Network Time Server daemon (ntpd) on a Linux host.
+Puppet module for managing the Network Time Server daemon (ntpd) on a Linux
+host. Configuration can either be a list of time server hostnames to use or a
+country code/continent which results in appropriate pool.ntp.org time server
+hosts being used.
 
 Currently only works on Redhat-like systems.
 
