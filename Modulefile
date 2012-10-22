@@ -1,5 +1,5 @@
 name    'erwbgy-ntp'
-version '0.0.1'
+version '0.5'
 source 'UNKNOWN'
 author 'erwbgy'
 license 'Apache License, Version 2.0'
