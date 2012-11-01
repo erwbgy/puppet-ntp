@@ -1,8 +1,8 @@
 class ntp::install {
-  package { [
-    'ntp',
-    'ntpdate'
-  ]:
-    ensure => installed,
+  if ! defined(Package['ntp']) {
+    package { 'ntp':  ensure => installed }
+  }
+  if ! defined(Package['ntpdate']) {
+    package { 'ntpdate':  ensure => installed }
   }
 }
