@@ -1,27 +1,9 @@
 class ntp (
-  $use_extlookup = false,
-  $use_hiera     = false,
-  $servers       = undef,
-  $country       = undef,
-  $continent     = undef
+  $servers   = undef,
+  $country   = undef,
+  $continent = undef
 ) {
-  if $use_hiera {
-    $_servers   = hiera('ntp_servers',   undef)
-    $_country   = hiera('ntp_country',   undef)
-    $_continent = hiera('ntp_continent', undef)
-  }
-  elsif $use_extlookup {
-    $_servers   = extlookup('ntp_servers',   undef)
-    $_country   = extlookup('ntp_country',   undef)
-    $_continent = extlookup('ntp_continent', undef)
-  }
-  else {
-    $_servers   = $servers
-    $_country   = $country
-    $_continent = $continent
-  }
-
-  case $_continent {
+  case $continent {
     undef:           {}
     'africa':        {}
     'asia':          {}
@@ -30,25 +12,25 @@ class ntp (
     'oceania':       {}
     'south-america': {}
     default: {
-      notify { "ntp: unknown continent '${_continent}' specified - known good values are: 'europe', 'asia', 'oceania', 'north-america', 'south-america', 'africa'": }
+      notify { "ntp: unknown continent '${continent}' specified - known good values are: 'europe', 'asia', 'oceania', 'north-america', 'south-america', 'africa'": }
     }
   }
 
-  if $_servers {
-    $_serverlist = $_servers
+  if $servers {
+    $_serverlist = $servers
   }
-  elsif $_country {
+  elsif $country {
     $_serverlist = [
-      "0.${_country}.pool.ntp.org",
-      "1.${_country}.pool.ntp.org",
-      "2.${_country}.pool.ntp.org",
+      "0.${country}.pool.ntp.org",
+      "1.${country}.pool.ntp.org",
+      "2.${country}.pool.ntp.org",
     ]
   }
-  elsif $_continent {
+  elsif $continent {
     $_serverlist = [
-      "0.${_continent}.pool.ntp.org",
-      "1.${_continent}.pool.ntp.org",
-      "2.${_continent}.pool.ntp.org",
+      "0.${continent}.pool.ntp.org",
+      "1.${continent}.pool.ntp.org",
+      "2.${continent}.pool.ntp.org",
     ]
   }
   else {

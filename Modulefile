@@ -1,5 +1,5 @@
 name    'erwbgy-ntp'
-version '0.5.1'
+version '0.6.0'
 source 'git.com:erwbgy/puppet-ntp.git'
 author 'erwbgy'
 license 'Apache License, Version 2.0'

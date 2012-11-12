@@ -15,10 +15,6 @@ Currently only works on Redhat-like systems.
 
 *continent*: one of: _europe_, _asia_, _oceania_, _north-america_, _south-america_, _africa_
 
-*use_hiera*: get configuration values using hiera
-
-*use_extlookup*: get configuration values using extlookup
-
 If servers is specified it takes precedence over country or continent.  If
 only country and continent are specified then country takes precedence over
 continent.
@@ -26,45 +22,26 @@ continent.
 If use_hiera or use_extlookup are specified then the other parameters are
 ignored.  Hiera is checked before extlookup.
 
-### Hiera configuration
+### Puppet 3 Hiera configuration
 
-Add an ntp_servers, ntp_country or ntp_continent variable to a hiera config
+Add an ntp::servers, ntp::country or ntp::continent variable to a hiera config
 file - for example in /etc/puppet/hieradata/common.yaml:
 
 Add the ntp_servers variable with a list of time server hostnames (often
 internal hosts):
 
-    ntp_servers:
+    ntp::servers:
       - ntp1.domain.com
       - ntp2.domain.com
 
 Or the ntp_country variable with a country code:
 
-    ntp_country: de
+    ntp::country: de
 
 Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
 'north-america', 'south-america', 'africa':
 
-    ntp_continent: africa
-
-### Extlookup configuration
-
-Add an ntp_servers, ntp_country or ntp_continent variable to an extlookup
-config file - for example in /etc/puppet/extdata/common.csv:
-
-Add the ntp_servers variable with a list of time server hostnames (often
-internal hosts):
-
-    ntp_servers,ntp1.domain.com,ntp2.domain.com
-
-Or the ntp_country variable with a country code:
-
-    ntp_country,de
-
-Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
-'north-america', 'south-america', 'africa':
-
-    ntp_continent,africa
+    ntp::continent: africa
 
 ## Examples
 
@@ -88,18 +65,6 @@ Use time servers from a specific continent, in this case Asia:
 
     class { 'ntp':
       continent => 'asia',
-    }
-
-Look up configuration using hiera:
-
-    class { 'ntp':
-      use_hiera => true,
-    }
-
-Look up configuration using extlookup:
-
-    class { 'ntp':
-      use_extlookup => true,
     }
 
 ## Notes

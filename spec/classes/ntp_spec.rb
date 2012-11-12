@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe 'ntp', :type => 'class' do
+  include_context 'hieradata'
   context 'no parameters' do
-    let(:params) { {}  }
+    let(:params) { {} }
     it {
       should create_class('ntp::config').with_servers([ '0.pool.ntp.org', '1.pool.ntp.org', '2.pool.ntp.org' ])
     }
