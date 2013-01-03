@@ -1,8 +1,12 @@
 class ntp::config (
-  $servers = undef
+  $servers = undef,
+  $iburst = undef,
 ) {
   if $servers == undef {
     fail('ntp::config servers parameter must be supplied')
+  }
+  if $iburst == undef {
+    fail('ntp::config iburst parameter must be supplied')
   }
   # defaults
   File {
