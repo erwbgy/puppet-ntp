@@ -11,7 +11,7 @@ restrict -6 default kod nomodify notrap nopeer noquery
 # Permit all access over the loopback interface.  This could
 # be tightened as well, but to do so would effect some of
 # the administrative functions.
-restrict 127.0.0.1 
+restrict 127.0.0.1
 restrict -6 ::1
 
 # Hosts on local network are less restricted.
@@ -20,7 +20,7 @@ restrict -6 ::1
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 <% (scope.lookupvar('ntp::config::servers')).each do |entry| -%>
-server <%= entry %>
+server <%= entry %><%= iburst %>
 <% end -%>
 
 #broadcast 192.168.1.255 autokey	# broadcast server
@@ -31,9 +31,9 @@ server <%= entry %>
 #manycastclient 239.255.254.254 autokey # manycast client
 
 # Undisciplined Local Clock. This is a fake driver intended for backup
-# and when no outside source of synchronized time is available. 
+# and when no outside source of synchronized time is available.
 #server	127.127.1.0	# local clock
-#fudge	127.127.1.0 stratum 10	
+#fudge	127.127.1.0 stratum 10
 
 # Enable public key cryptography.
 #crypto
@@ -41,7 +41,7 @@ server <%= entry %>
 includefile /etc/ntp/crypto/pw
 
 # Key file containing the keys and key identifiers used when operating
-# with symmetric key cryptography. 
+# with symmetric key cryptography.
 keys /etc/ntp/keys
 
 # Specify the key identifiers which are trusted.

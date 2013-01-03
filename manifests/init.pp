@@ -1,5 +1,6 @@
 class ntp (
   $servers   = undef,
+  $iburst    = undef,
   $country   = undef,
   $continent = undef
 ) {
@@ -16,6 +17,12 @@ class ntp (
     }
   }
 
+  if $iburst {
+    $_iburst = ' iburst'
+  }
+  else {
+    $_iburst = ''
+  }
   if $servers {
     $_serverlist = $servers
   }
@@ -42,7 +49,8 @@ class ntp (
   }
 
   class { 'ntp::config':
-    servers => $_serverlist
+    servers => $_serverlist,
+    iburst => $_iburst,
   }
   include ntp::install
   include ntp::service
