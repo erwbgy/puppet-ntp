@@ -5,11 +5,13 @@ host. Configuration can either be a list of time server hostnames to use or a
 country code/continent which results in appropriate pool.ntp.org time server
 hosts being used.
 
-Currently only works on Redhat-like systems.
+Currently only tested on Redhat-like systems.
 
 ## Parameters
 
 *servers*: a list of time server hostnames
+
+*iburst*: whether of not to enable the iburst option - default 'false'
 
 *country*: the country code (eg. _de_ for Germany or _uk_ for United Kingdom)
 
@@ -77,22 +79,12 @@ the default pool if your country is not listed.
 ## Testing
 
 Tests are implemented using RSpec, rspec-puppet and puppetlabs_spec_helper.  To
-run them you will first need to install puppetlabs_spec_helper:
+run them you will first need to install puppetlabs_spec_helper and
+rspec-hiera-puppet:
 
-    # gem install puppetlabs_spec_helper
+    # gem install puppetlabs_spec_helper rspec-hiera-puppet
 
 Then switch to the module directory and run rake:
-
-    $ rake
-    rake build            # Build puppet module package
-    rake clean            # Clean a built module package
-    rake coverage         # Generate code coverage information
-    rake help             # Display the list of available rake tasks
-    rake lint             # Check puppet manifests with puppet-lint
-    rake spec             # Run spec tests in a clean fixtures directory
-    rake spec_clean       # Clean up the fixtures directory
-    rake spec_prep        # Create the fixtures directory
-    rake spec_standalone  # Run spec tests on an existing fixtures directory
 
     $ rake spec
     /usr/bin/ruby -S rspec spec/classes/ntp_spec.rb --color
@@ -106,4 +98,3 @@ Then switch to the module directory and run rake:
 License: Apache License, Version 2.0
 
 GitHub URL: https://github.com/erwbgy/puppet-ntp
-
