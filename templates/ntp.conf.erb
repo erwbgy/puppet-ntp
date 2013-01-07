@@ -20,7 +20,7 @@ restrict -6 ::1
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 <% (scope.lookupvar('ntp::config::servers')).each do |entry| -%>
-server <%= entry %><%= iburst %>
+server <%= entry %><% if @iburst %> iburst<% end %>
 <% end -%>
 
 #broadcast 192.168.1.255 autokey	# broadcast server

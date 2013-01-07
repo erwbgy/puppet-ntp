@@ -1,13 +1,7 @@
 class ntp::config (
-  $servers = undef,
-  $iburst = undef,
+  $servers, # array
+  $iburst,  # bool
 ) {
-  if $servers == undef {
-    fail('ntp::config servers parameter must be supplied')
-  }
-  if $iburst == undef {
-    fail('ntp::config iburst parameter must be supplied')
-  }
   # defaults
   File {
     owner => 'root',
