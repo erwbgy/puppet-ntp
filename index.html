@@ -38,19 +38,17 @@ host. Configuration can either be a list of time server hostnames to use or a
 country code/continent which results in appropriate pool.ntp.org time server
 hosts being used.</p>
 
-<p>Currently only works on Redhat-like systems.</p>
+<p>Currently only tested on Redhat-like systems.</p>
 
 <h2>Parameters</h2>
 
 <p><em>servers</em>: a list of time server hostnames</p>
 
+<p><em>iburst</em>: whether of not to enable the iburst option - default 'false'</p>
+
 <p><em>country</em>: the country code (eg. <em>de</em> for Germany or <em>uk</em> for United Kingdom)</p>
 
 <p><em>continent</em>: one of: <em>europe</em>, <em>asia</em>, <em>oceania</em>, <em>north-america</em>, <em>south-america</em>, <em>africa</em></p>
-
-<p><em>use_hiera</em>: get configuration values using hiera</p>
-
-<p><em>use_extlookup</em>: get configuration values using extlookup</p>
 
 <p>If servers is specified it takes precedence over country or continent.  If
 only country and continent are specified then country takes precedence over
@@ -59,50 +57,28 @@ continent.</p>
 <p>If use_hiera or use_extlookup are specified then the other parameters are
 ignored.  Hiera is checked before extlookup.</p>
 
-<h3>Hiera configuration</h3>
+<h3>Puppet 3 Hiera configuration</h3>
 
-<p>Add an ntp_servers, ntp_country or ntp_continent variable to a hiera config
+<p>Add an ntp::servers, ntp::country or ntp::continent variable to a hiera config
 file - for example in /etc/puppet/hieradata/common.yaml:</p>
 
 <p>Add the ntp_servers variable with a list of time server hostnames (often
 internal hosts):</p>
 
-<pre><code>ntp_servers:
+<pre><code>ntp::servers:
   - ntp1.domain.com
   - ntp2.domain.com
 </code></pre>
 
 <p>Or the ntp_country variable with a country code:</p>
 
-<pre><code>ntp_country: de
+<pre><code>ntp::country: de
 </code></pre>
 
 <p>Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
 'north-america', 'south-america', 'africa':</p>
 
-<pre><code>ntp_continent: africa
-</code></pre>
-
-<h3>Extlookup configuration</h3>
-
-<p>Add an ntp_servers, ntp_country or ntp_continent variable to an extlookup
-config file - for example in /etc/puppet/extdata/common.csv:</p>
-
-<p>Add the ntp_servers variable with a list of time server hostnames (often
-internal hosts):</p>
-
-<pre><code>ntp_servers,ntp1.domain.com,ntp2.domain.com
-</code></pre>
-
-<p>Or the ntp_country variable with a country code:</p>
-
-<pre><code>ntp_country,de
-</code></pre>
-
-<p>Or the ntp_continent variable with one of 'europe', 'asia', 'oceania',
-'north-america', 'south-america', 'africa':</p>
-
-<pre><code>ntp_continent,africa
+<pre><code>ntp::continent: africa
 </code></pre>
 
 <h2>Examples</h2>
@@ -133,20 +109,6 @@ internal hosts):</p>
 }
 </code></pre>
 
-<p>Look up configuration using hiera:</p>
-
-<pre><code>class { 'ntp':
-  use_hiera =&gt; true,
-}
-</code></pre>
-
-<p>Look up configuration using extlookup:</p>
-
-<pre><code>class { 'ntp':
-  use_extlookup =&gt; true,
-}
-</code></pre>
-
 <h2>Notes</h2>
 
 <p>See <a href="http://www.pool.ntp.org/en/use.html">How do I use pool.ntp.org</a> for
@@ -157,25 +119,15 @@ the default pool if your country is not listed.</p>
 <h2>Testing</h2>
 
 <p>Tests are implemented using RSpec, rspec-puppet and puppetlabs_spec_helper.  To
-run them you will first need to install puppetlabs_spec_helper:</p>
+run them you will first need to install puppetlabs_spec_helper and
+rspec-hiera-puppet:</p>
 
-<pre><code># gem install puppetlabs_spec_helper
+<pre><code># gem install puppetlabs_spec_helper rspec-hiera-puppet
 </code></pre>
 
 <p>Then switch to the module directory and run rake:</p>
 
-<pre><code>$ rake
-rake build            # Build puppet module package
-rake clean            # Clean a built module package
-rake coverage         # Generate code coverage information
-rake help             # Display the list of available rake tasks
-rake lint             # Check puppet manifests with puppet-lint
-rake spec             # Run spec tests in a clean fixtures directory
-rake spec_clean       # Clean up the fixtures directory
-rake spec_prep        # Create the fixtures directory
-rake spec_standalone  # Run spec tests on an existing fixtures directory
-
-$ rake spec
+<pre><code>$ rake spec
 /usr/bin/ruby -S rspec spec/classes/ntp_spec.rb --color
 ............
 
