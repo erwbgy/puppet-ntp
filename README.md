@@ -34,7 +34,6 @@ internal hosts):
 
     ntp::servers:
       - ntp1.domain.com
-      - ntp2.domain.com
 
 Or the ntp_country variable with a country code:
 
