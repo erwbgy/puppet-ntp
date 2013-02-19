@@ -1,3 +1,7 @@
+0.7.1:
+
+* Regression: restart the NTP service if the config changes
+
 0.7.0:
 
 * Use augeas to change server entries leaving the rest of the config file
