@@ -1,3 +1,8 @@
+0.7.2:
+
+* Don't attempt to install the ntpdate package if the operating system version
+is < 6.0 as it doesn't exist (#1 thanks dustyketchum).
+
 0.7.1:
 
 * Regression: restart the NTP service if the config changes

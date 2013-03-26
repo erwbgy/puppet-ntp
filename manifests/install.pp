@@ -1,8 +1,17 @@
 class ntp::install {
-  if ! defined(Package['ntp']) {
-    package { 'ntp':  ensure => installed }
-  }
-  if ! defined(Package['ntpdate']) {
-    package { 'ntpdate':  ensure => installed }
+  case $::operatingsystem {
+    'RedHat', 'CentOS', 'OracleLinux': {
+      if ! defined(Package['ntp']) {
+        package { 'ntp':  ensure => installed }
+      }
+      if versioncmp($::operatingsystemrelease, '6.0') > 0 {
+        if ! defined(Package['ntpdate']) {
+          package { 'ntpdate':  ensure => installed }
+        }
+      }
+    }
+    default: {
+      fail('Currently only works on RedHat-like systems')
+    }
   }
 }
