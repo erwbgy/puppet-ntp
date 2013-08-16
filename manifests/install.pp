@@ -1,6 +1,6 @@
 class ntp::install {
   case $::operatingsystem {
-    'RedHat', 'CentOS', 'OracleLinux': {
+    'RedHat', 'CentOS', 'OracleLinux', 'Amazon': {
       if ! defined(Package['ntp']) {
         package { 'ntp':  ensure => installed }
       }
