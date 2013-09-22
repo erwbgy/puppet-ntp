@@ -1,3 +1,9 @@
+0.7.3:
+
+* Use Ruby instance variables in templates (thanks #seb-github)
+
+* Support Amazon Linux (thanks #antonbabenko)
+
 0.7.2:
 
 * Don't attempt to install the ntpdate package if the operating system version
