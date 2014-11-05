@@ -7,5 +7,6 @@ class ntp::config (
     incl    => '/etc/ntp.conf',
     lens    => 'Ntp.lns',
     notify  => Class['ntp::service'],
+    require => Package['ntp'],
   }
 }
